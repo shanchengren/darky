@@ -1,0 +1,239 @@
+<!--<?php
+print <<<EOT
+-->
+<style>
+.pp td{padding:5px 10px;}
+.p_lr_10{padding:0 6px;}
+</style>
+<table cellspacing="0" width="100%" style="table-layout:fixed;">
+<!--
+EOT;
+if ($special == '1') {print <<<EOT
+-->
+	<tbody>
+		<tr class="f_two pp"><td width="110"><b>投票限制条件:</b></td><td>&nbsp;</td></tr>
+		<tr class="pp">
+			<td>有效天数:</td>
+			<td><input class="input" type="text" name="timelimit" value="$set[timelimit]" size="1" $set[voteable] tabindex="3"/><span style="padding-right:3em;">
+<!--
+EOT;
+if ($action == 'modify' && !$set['close']) {print <<<EOT
+-->
+		<input type="checkbox" name="vote_close" value="1" tabindex="4"/>结束投票
+<!--
+EOT;
+}print <<<EOT
+-->
+			</span>在&nbsp; <input type="text" class="input" maxlength="10" size="8" id="regdatelimit" name="regdatelimit" value="$set[regdatelimit]" $set[voteable] onClick="javascript:ShowCalendar(this.id)" tabindex="5"/> &nbsp;<span class="s2">之前注册用户</span> 方可投票
+			</td>
+		</tr>
+		<tr class="f_two pp">
+			<td>结果相关:</td>
+			<td>
+				<label class="mr10"><input type="checkbox" value="1" name="modifiable" $set[ifmodify] $set[voteable] tabindex="6"/>是否允许修改投票结果</label>
+				<label class="mr10"><input type="checkbox" value="1" name="previewable" $set[ifpreview] $set[voteable] tabindex="7"/>强制投票才能查看结果</label>
+			</td>
+		</tr>
+		<tr class="pp">
+			<td>积分限制:</td>
+			<td>
+<!--
+EOT;
+foreach ($credit->cType as $key => $value) {print <<<EOT
+-->
+				<input type="text" class="input mr5" size="1" name="creditlimit[$key]" value="{$set['ifcreditlimit'.$key]}" $set[voteable] tabindex="11"/><span class="mr10">$value</span>
+<!--
+EOT;
+}print <<<EOT
+-->
+			</td>
+		</tr>
+		<tr class="pp f_two">
+			<td>是否多选:</td>
+			<td><span style="padding-right:2em;"><input type="checkbox" value="1" name="multiplevote" $set[multi] $set[voteable] tabindex="8"/></span>&nbsp;最少&nbsp;<input class="input" maxlength="10" size="1" name="leastvotes" value="$set[leastvotes]" $set[voteable] tabindex="9"/>&nbsp;个，最多&nbsp;<input class="input" maxlength="10" size="1" name="mostvotes" value="$set[mostvotes]" $set[voteable] tabindex="10"/>&nbsp;个</td>
+		</tr>
+		<tr class="pp">
+			<td>发帖数限制:</td>
+			<td><input type="text" class="input" maxlength="10" size="1"  name="postnumlimit" value="$set[postnumlimit]" $set[voteable] tabindex="12"/> &nbsp;发帖数大于此设置方可投票</td>
+		</tr>
+	</tbody>
+	<tbody><tr class="pp f_two"><td>投票选项:</td>
+		<td>
+<!--
+EOT;
+if ($action == 'modify') {
+foreach ($set['votearray'] as $key => $votes) {print <<<EOT
+-->
+			<input class="input" type="text" maxLength="60" name="vt_selarray[$key]" size="60" value="$votes[0]" $set[voteable] tabindex="13"/><br />
+<!--
+EOT;
+}print <<<EOT
+-->
+			<input class="input" type="text" maxLength="60" name="vt_selarray[]" size="60" value="" $set[voteable] tabindex="14"/> 新的投票项（留空忽略）<br />
+<!--
+EOT;
+} else {print <<<EOT
+-->
+			<textarea name="vt_select" wrap="hard" tabindex="15" class="textareaA mb5">$vt_select</textarea>
+<!--
+EOT;
+}print <<<EOT
+--><p class="s6">每行写一个投票选项，最多可以有 $db_selcount 个选项</p>
+		</td>
+	</tr></tbody>
+<!--
+EOT;
+} elseif ($special == '2') { print <<<EOT
+-->
+		<tr class="f_two pp">
+			<td width="110">活动标题:<span class="s1">*</span></td>
+			<td><input class="input input_wb" type="text" name="act_subject" value="$set[subject]" /></td>
+		</tr>
+		<tr class="pp">
+			<td>活动时间:<span class="s1">*</span></td>
+			<td><input class="input input_wa" type="text" name="act_starttime" id="starttime" value="$set[starttime]" onClick="javascript:ShowCalendar(this.id,1)" /><span class="p_lr_10">-</span><input class="input input_wa" type="text" name="act_endtime" id="endtime" value="$set[endtime]" onClick="javascript:ShowCalendar(this.id,1)" /></td>
+		</tr>
+		<tr class="f_two pp">
+			<td>报名截止日期:<span class="s1">*</span></td>
+			<td>
+				<input class="input input_wa" name="act_deadline" id="deadline" value="$set[deadline]" type="text" onClick="javascript:ShowCalendar(this.id,1)" />
+			</td>
+		</tr>
+		<tr class="pp">
+			<td>活动地点:</td>
+			<td><input class="input input_wb" type="text" name="act_location" value="$set[location]" /></td>
+		</tr>
+		<tr class="f_two pp">
+			<td>人数限制:</td>
+			<td><input class="input input_wa mr10" type="text" name="act_num" value="$set[num]" size="5" />&nbsp;人（不限制人数，请留空）</td>
+		</tr>
+		<tr class="pp">
+			<td>性别要求:</td>
+			<td>
+				<label class="mr10"><input name="act_sex" type="radio" value="0" $set[sel_0] />不限</label>
+				<label class="mr10"><input name="act_sex" type="radio" value="1" $set[sel_1] />男</label>
+				<label class="mr10"><input name="act_sex" type="radio" value="2" $set[sel_2] />女</label>
+			</td>
+		</tr>
+		<tr class="f_two pp">
+			<td>活动费用:</td>
+			<td><input class="input input_wa mr10" type="text" name="act_costs" size="8" value="$set[costs]" /> 元</td>
+		</tr>
+<!--
+EOT;
+} elseif ($special == '3' && $_G['allowreward']) {print <<<EOT
+-->
+	<tbody><tr class="f_two">
+		<td class="p10">
+		<p class="mb5"><span class="mr10 b">悬赏帖设置</span>
+<!--
+EOT;
+if ($action == 'modify') {print <<<EOT
+-->
+		<label><input type="checkbox" name="addreward" value="1" /> 追加悬赏 (延长时间)</label>
+<!--
+EOT;
+}print <<<EOT
+--></p>
+		<p class="mb5"><span class="mr10">最佳答案：</span><select id="p_credit" name="ctype[best]" onchange="showreward();" class="mr10 select_wa">$set[b_select]</select><input id="r_credit" name="bonus[best]" value="$postSpecial->b_val" class="input input_wc mr5" onchange="showreward();" /><span class="mr5">点 (最少 $postSpecial->b_val 点) <span id="reward_info" class="gray"></span></span></p>
+		<p><span class="mr10">热心助人：</span><select name="ctype[active]" class="mr10 select_wa">$set[a_select]</select><input name="bonus[active]" value="$postSpecial->a_val" class="input input_wc mr5" /><span class="mr10">点 (最少 $postSpecial->a_val 点)</span><span class="s6">奖励热心回复者的积分点数，将扣除您相应的积分点数</span></p>
+		</td>
+	</tr></tbody>
+	<script language="JavaScript">
+	var old_credit = getObj('r_credit').value;
+	function showreward(){
+		var credit  = getObj('r_credit').value;
+		var credit2 = credit*2;
+		var p_credit = getObj('p_credit');
+		var cname = p_credit.options[p_credit.selectedIndex].text;
+
+		if (credit > 0) {
+			old_credit = credit;
+			getObj('reward_info').innerHTML = '将扣除<span class="s3">' + credit2 + '</span>点' + cname + '，结束悬赏时，系统自动返回<span class="s3">' + credit + '</span>点' + cname;
+		} else {
+			getObj('r_credit').value = old_credit;
+		}
+	}
+	showreward();
+	</script>
+<!--
+EOT;
+} elseif ($special == '4') {print <<<EOT
+-->
+	<tr class="pp f_two">
+		<td width="110">商品名称:</td>
+		<td><input class="input input_wa mr10" name="goodsname" value="$set[name]" size="30" /> <select name="degree"><option value="0" $set[degree_0]>全新</option><option value="1" $set[degree_1]>二手</option></select></td>
+	</tr>
+	<tr class="pp f_two">
+		<td>商品图片:</td>
+		<td><input class="input input_wa" type="file" name="attachment_0" /></td>
+	</tr>
+	<tr class="pp">
+		<td>商品数量:</td>
+		<td><input type="text" class="input input_wa" name="goodsnum" value="$set[num]" size="8" /></td>
+	</tr>
+	<tr class="pp f_two">
+		<td>商品原价:</td>
+		<td><input type="text" class="input input_wa" name="price" value="$set[price]" size="8" /></td>
+	</tr>
+	<tr class="pp">
+		<td>商品现价:</td>
+		<td><input type="text" class="input input_wa" name="costprice" value="$set[costprice]" size="8" /></td>
+	</tr>
+	<tr class="pp f_two">
+		<td>所 在 地:</td>
+		<td><input type="text" class="input input_wa" name="locus" value="$set[locus]" size="30" /></td>
+	</tr>
+	<tr class="pp">
+		<td>运费方式:</td>
+		<td>
+			<label class="mr10"><input type="radio" name="transport" value="0" onclick="showmethod(0);" $set[tspt_0] />卖家承担</label>
+			<label class="mr10"><input type="radio" name="transport" value="1" onclick="showmethod(1);" $set[tspt_1] />买家承担</label>
+			<span style="display:none;" id="logistics">
+				<span class="mr10">平邮 <input type="text" class="input" name="mailfee" value="$set[mailfee]" size="4" /> 元</span>
+				<span class="mr10">快递 <input type="text" class="input" name="expressfee" value="$set[expressfee]" size="4" /> 元</span>
+				<span class="mr10">EMS <input type="text" class="input" name="emsfee" value="$set[emsfee]" size="4" /> 元</span>
+			</span>
+		</td>
+	</tr>
+	<tr class="pp f_two">
+		<td>收款方式：</td>
+		<td>
+			<input type="checkbox" name="paymethod[]" value="1" $set[paym_1] />线下交易
+			<input type="checkbox" name="paymethod[]" value="2" $set[paym_2] />支付宝
+		</td>
+	</tr>
+<script language="JavaScript">
+//attachnum--;
+function showmethod(v) {
+	getObj('logistics').style.display = v == 1 ? '' : 'none';
+}
+showmethod('$set[transport]');
+</script>
+<!--
+EOT;
+} elseif ($special == '5') {print <<<EOT
+-->
+	<tbody>
+		<tr class="pp f_two"><td width="110">辩论结束时间:</td>
+			<td><input class="input input_wa" type="text" name="endtime" value="$set[endtime]" id="endtime" onClick="javascript:ShowCalendar(this.id,1)" size="20" $set[debateable] />
+			</td>
+		</tr>
+		<tr class="pp"><td>裁判:</td>
+		    <td><input class="input input_wa" type="text" name="umpire" value="$set[umpire]" $set[debateable] /></td>
+		</tr>
+		<tr class="pp f_two"><td>正方观点:</td>
+		    <td><input class="input input_wb" type="text" name="obtitle" value="$set[obtitle]" size="50" $set[debateable] /></td>
+		</tr>
+		<tr class="pp"><td>反方观点:</td>
+		    <td><input class="input input_wb" type="text" name="retitle" value="$set[retitle]" size="50" $set[debateable] /></td>
+		</tr>
+	</tbody>
+<!--
+EOT;
+}print <<<EOT
+-->
+</table>
+<!--
+EOT;
+?>

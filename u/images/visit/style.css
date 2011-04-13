@@ -1,0 +1,61 @@
+body,a{color:#434343;}
+a:hover{text-decoration:underline}
+em{font-style:normal}
+strong{font-weight:bold}
+.hidden{display:none}
+.mt5{margin-top:5px;}
+.mt15{margin-top:15px;}
+
+.w710{width:710px;}
+.w210{width:210px;}
+
+.list1 li,.pane1 h2,.more,.look .hd h2{background:url(icon.png) no-repeat 0 0;}
+.list1 li{background-position:0 -103px; padding:0 2px 0 0;border-bottom:1px dashed #e8e8e8;line-height:24px; width:47%;text-indent:15px;margin-left:1.5%; float:left;overflow:hidden;height:24px;}
+.list1 li a{color:#333;}
+.list1 li a.gray{color:#999;}
+.pane1 .hd{background:url(title_bg.png) no-repeat; padding:0 10px;height:35px;line-height:35px;}
+.pane1 .bd{padding:0px 15px;}
+.pane1 h2{background-position:0 10px; padding-left:15px; font-size:14px; font-weight:700; color:#333;}
+.pane1 h2 em{color:#ff7d01;}
+.more{background-position:0 -148px;display:block; width:41px; height:11px; float:right; text-indent:-999em; margin-top:8px;}
+.pane2{border:1px solid #eaeaea; padding:1px;}
+.pane2 .pane2_warp{background:#f4f2f3; padding:6px 10px 12px;}
+.pane2 .hd{height:26px;}
+.pane2 .hd h2{font-size:14px; font-weight:700; color:#ff5500;}
+.pane2 .bd{background:#FFF;padding:5px;}
+.pane2 .bd .hotList li span{width:150px; font-size:10px;}
+.pane2 .bd .hotList li{border-bottom:1px dotted #ccc;}
+.pane2 .bd .hotList li a{color:#333; font-size:12px;-webkit-text-size-adjust:none;}
+
+/*picture*/
+.picture,.picture h2,.picture .pic_r{background:url(pho_bg.png) no-repeat 0 0;height:159px;}
+.picture .view-hover,.picture .view-current{min-height:130px;_height:130px;width:100%;}
+.picture{background-position:0 -159px; background-repeat:repeat-x; position:relative;}
+.picture h2{background-position:0 0; width:61px; display:block; left:-19px;position:absolute;}
+.picture .pic_r{background-position:right -318px; width:10px; display:block; right:0;position:absolute;}
+.picture ul{width:660px;left:40px; top:15px;position:absolute;}
+.picture ul li{float:left;width:119px; margin-left:11px; display:inline;}
+
+/*daren*/
+.daren h2{background:url(daren.png) left center no-repeat;height:30px;overflow:hidden; text-indent:-2000em;padding:10px 0 0;}
+.daren_wrap{width:650px;overflow:hidden;}
+.daren ul{height:60px;padding-top:13px;overflow:hidden;}
+.daren li{float:left;width:190px;padding-left:25px;line-height:20px;height:58px;overflow:hidden;}
+.daren li span.fl{width:125px;}
+.daren_img{float:left;padding:2px;border:1px solid #ccc;margin:3px 10px 0 0;display:block;overflow:hidden;height:48px;}
+.daren_img img{}
+.daren_img:hover{border:1px solid #ff7700;}
+
+/*weibo*/
+.w710 .dl{width:665px;}
+.w710 .dd{width:590px;}
+
+
+.hotList li{height:25px;line-height:25px;border-bottom:1px dotted #c9dce9;}
+.hotList li em,.hotList li span,.hotList li cite{float:left;}
+.hotList li em{width:15px; text-align:center;margin-right:10px; font-size:10px;-webkit-text-size-adjust:none;overflow:hidden;}
+.hotList li.top em{background-position:-199px 6px;color:#fb5912;}
+.hotList li span{width:175px;}
+.hotList li a{margin-right:5px;}
+.hotList li cite{width:9px;height:9px;display:block; text-indent:-2000em;overflow:hidden; background-position:-220px -30px;margin-top:8px;}
+.hotList li cite.hotDown{ background-position:-200px -30px;}

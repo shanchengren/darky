@@ -1,0 +1,46 @@
+<?php
+print <<<EOT
+<!doctype html>
+<html>
+<head>
+<meta charset="$db_charset" />
+<title>{$webPageTitle}提示信息 - Powered by phpwind</title>
+<meta http-equiv="refresh" content="$statime;url=$URL">
+<SCRIPT type="text/javascript" language="JavaScript" src="js/core/core.js"></SCRIPT>
+<script type="text/javascript" language="JavaScript" src="js/pw_ajax.js"></script>
+<link rel="stylesheet" type="text/css" href="$imgpath/pw_core.css?101128" media="all" />
+EOT;
+@include Pcv($css_path);
+print <<<EOT
+-->
+<link rel="stylesheet" type="text/css" href="$imgpath/register/register.css?110120" media="all" />
+<base id="headbase" href="$db_bbsurl/" />
+</head>
+<body onKeyDown="try{keyCodes(event);}catch(e){}">
+<div class="wrap">
+	<div id="header">
+		<div style="height:24px;"></div>
+		<div id="head" class="cc"><a href="$db_bbsurl/"><img src="$imgpath/$stylepath/logo.png" class="fl" title="phpwind" /></a></div>
+	</div>
+	<div class="main-wrap">
+		<div id="main">
+			<div id="pw_content">
+				<div class="p20">
+					<div class="regTitle cc">
+						<h5 class="s6"><b>提示信息</b></h5>
+					</div>
+					<div class="cc">
+						<div class="regCorrect">
+							<p class="f14 mb10">$content</p>
+							<p><a href="$URL" class="s4 f14" tabindex="20">如果您的浏览器没有自动跳转,请点击这里</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+EOT;
+?>

@@ -1,0 +1,156 @@
+<!--<?php print <<<EOT
+-->
+<div class="B_menu B_p10">
+	<div style="width: 480px;">
+		<div class="B_menu_nav B_cc">
+			<a style="margin-top: 2px;" class="B_menu_adel B_close" href="#">×</a>
+			<ul class="B_cc B_drag_handle">
+<!--
+EOT;
+if (in_array('local', $tabs)) {print <<<EOT
+-->
+				<li id="tab_local" class="B_tab_trigger{$currentCss['local']}"><a href="javascript:;">本地图片</a></li>
+<!--
+EOT;
+}if (in_array('album', $tabs)) {print <<<EOT
+-->
+				<li id="tab_album" class="B_tab_trigger{$currentCss['album']}"><a href="javascript:;">相册图片</a></li>
+<!--
+EOT;
+}if (in_array('network', $tabs)) {print <<<EOT
+-->
+				<li id="tab_network" class="B_tab_trigger{$currentCss['network']}"><a href="javascript:;">网络图片</a></li>
+<!--
+EOT;
+}print <<<EOT
+-->
+			</ul>
+		</div>
+<!--
+EOT;
+if (in_array('local', $tabs)) {print <<<EOT
+-->
+		<div class="B_photo_con B_tab_panel" style="display:{$display['local']}">
+			<div class="B_mb10 B_cc" style="height:25px;">
+<!--
+EOT;
+	if ($albums) {print <<<EOT
+-->
+				<span class="B_fr">
+					<label class="B_mr5"><input type="checkbox" name="savetoalbum" value="1">同时保存到</label>
+					<select name="albumid">
+<!--
+EOT;
+		foreach ($albums as $key => $value) {print <<<EOT
+-->
+						<option value="{$value['aid']}">{$value['aname']}</option>
+<!--
+EOT;
+		}
+print <<<EOT
+-->
+					</select>
+				</span>
+<!--
+EOT;
+	}
+print <<<EOT
+-->
+				<span id="B_picuploader_container"><span id="B_picuploader_flash"></span></span>
+			</div>
+			<div class="B_mb5">
+				<div class="B_file_imgTip B_cc">
+					图片列表&nbsp;<span>(总共可以添加<span class="restCount s4"></span>个)</span>
+				</div>
+				<div class="B_file_img">
+					<ul id="B_image_tile" class="B_cc"><li style="width:0;overflow:hidden;height:0px;padding:0;margin:0;"></li></ul>
+				</div>
+			</div>
+			<div class="B_file_tips">
+				<a href="javascirpt:;" class="B_helpA" style="float:right;padding:0 0 0 18px;width:auto;"  onclick="event&&(event.returnValue=false)">可上传类型<i id="image_allow_filetype"></i></a>
+				<div class="B_helpB">点击已上传图片插入到帖子</div>
+			</div>
+		</div>
+<!-- 
+EOT;
+}
+if (in_array('album', $tabs)) {
+	if (count($photos) > 0) {
+		$photoListDisplay = 'style="display:"';
+		$noPhotoListDisplay = 'style="display:none"';
+	} else {
+		$photoListDisplay = 'style="display:none"';
+		$noPhotoListDisplay = 'style="display:"';
+	}
+print <<<EOT
+-->
+		<div class="B_photo_con B_tab_panel" style="display:{$display['album']};">
+<!--
+EOT;
+	if ($albums) {print <<<EOT
+-->
+			<div class="B_mb5">
+				<select id="album_list" name="aid">
+<!--
+EOT;
+		foreach ($albums as $album) {
+			$selectedHtml = $album['aid'] == $aid?' selected': '';
+print <<<EOT
+-->
+					<option value="{$album['aid']}" {$selectedHtml}>{$album['aname']}</option>
+<!--
+EOT;
+		}
+print <<<EOT
+-->
+				</select>
+			</div>
+<!--
+EOT;
+	}
+print <<<EOT
+-->
+			<div class="c"></div>
+			<div class="popupList" id="noPhotoList" {$noPhotoListDisplay}>
+				<div class="p10">相册下还没有照片，请先 <a href="apps.php?q=photos&a=upload&job=flash" class="s4" target="_blank">上传</a></div>
+			</div>
+			<div class="B_popupList B_mb10" id="photoList" {$photoListDisplay}>
+				<ul id="album" class="B_popUlone B_cc">
+<!--
+EOT;
+	foreach ($photos as $photo) {
+		$lastpos = strrpos($photo['path'],'/');
+		$photo['o_path'] = preg_match('/^s_/',basename($photo['path']))?dirname($photo['path']).'/'.substr($photo['path'],$lastpos+3) : $photo['path']; /* original path*/
+print <<<EOT
+-->
+					<li><span></span><label><img data-src="{$photo['path']}" /><input type="checkbox" value="{$photo['o_path']}" /></label></li>
+<!--
+EOT;
+	}
+print <<<EOT
+-->
+				</ul>
+			</div>
+			<div class="B_helpB">点击图片插入到帖子</div >
+		</div>
+<!--
+EOT;
+}
+if (in_array('network', $tabs)) {print<<<EOT
+-->
+		<div class="B_photo_con B_tab_panel" style="display:{$display['network']}">
+			<div style="padding-bottom:30px;">
+				<div class="B_tac B_p15 B_cc">图片地址：<input id="networkImg" size="50" type="text" class="input" value="http://" /></div>
+				<div class="B_tac"><span class="B_btn2"><span><button type="button" id="btn_insertImg">插入图片</button></span></span></div>
+			</div>
+		</div>
+<!--
+EOT;
+}print<<<EOT
+-->
+	</div>
+	<input type="hidden" id="verifyhash" value='' />
+</div>
+<!--
+EOT;
+?>-->

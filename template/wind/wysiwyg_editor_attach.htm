@@ -1,0 +1,42 @@
+<!--<?php
+print <<<EOT
+-->
+<div class="B_menu B_p10">
+	<div style="width:480px;">
+		<div class="B_h B_cc B_drag_handle">
+			<a href="javascript://" class="B_menu_adel B_close" style="margin-top:2px;">×</a>附件上传
+		</div>
+		<!--附件列表开始-->
+		<div class="B_tips" style="display:none"><strong>提示：</strong><span class="B_mr20">你有已经上传但未使用的附件，你希望？</span><a href="javascript://" class="B_mr20" onclick="uploader.getTemp()">选择使用</a><a href="javascript://" onclick="uploader.clear()">清空</a></div>
+		<div style="padding-top:5px">
+			<div class="B_mb10 cc">
+				<a id="B_sm_cfg" href="javascript://" class="B_fr">显示“售密设置”</a>
+				<span id="B_uploader_container"><span id="B_uploader_flash"></span></span>
+			</div>
+			<div class="B_file" style="display:none;">
+				<div style="padding:10px;">
+					支持同时上传多个附件，附件数量不得超过X个；<br>
+					可上传类型：$uploadfilesize
+				</div>
+			</div>
+			<div class="B_file">
+				<div class="cc">
+					<dl style="background:#f7f7f7;">
+						<dt>附件名&nbsp;<span>(总共可以添加<span class="restCount s4"></span>个)</span></dt>
+						<dd>附件描述</dd>
+						<dd class="B_file_dd">操作</dd>
+					</dl>
+					<div id="B_qlist"></div>
+					<!--选择文件后 显示的列表-->
+				</div>
+			</div>
+			<div class="B_file_tips">
+				<a href="javascript://" class="B_helpA" style="float:right;padding:0 0 0 18px;width:auto;" onclick="event&&(event.returnValue=false);">可上传类型<i id="attach_allow_filetype"></i></a>
+				<label><input name="atc_hideatt" type="checkbox" value="1" style="padding:0;margin:-2px 0 0;"> 隐藏附件（回复可见）<input type="hidden" name="isAttachOpen" value="1" /></label>
+			</div>
+		<!--结束-->
+	</div>
+</div>
+<!--
+EOT;
+?>-->
